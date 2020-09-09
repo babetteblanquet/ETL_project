@@ -1,12 +1,12 @@
 ETL Group project: The Victorian population and the projections of households until 2036.
 
-Team Members: 
+**Team Members:**
 1.	Joanna Gu
 2.	Ian Lim
 3.	Nelson Javier Garcia
 4.	Babette Blanquet
 
-1.	Project overview:
+**1.	Project overview:**
 In this ETL project, our goal is to build a database to understand the correlation between current population growth and projections of number of households in Victoria.
 
 Our dataset will provide data at the Statistical Area 2 (SA2) level which is equivalent to a suburb. For reference, there are 462 suburbs or SA2 in Victoria.
@@ -21,9 +21,7 @@ With the new dataset, we will be able to create new queries to answer questions 
 
 This analysis will be useful to forecast the needs of schools, aged care facilities, amenities, number and types of dwellings to service each area at Sa2 level but also SA3 and SA4 which are greater areas.
 
-2.	Extract the data sources
-
-2.	Extract the data sources
+**2.	Extract the data sources**
 
 •	Dataset 1:
 
@@ -66,7 +64,7 @@ With the breakdown below:
 Extract method: this dataset has been downloaded from its source and the relevant table saved as CSV.
 https://www.planning.vic.gov.au/land-use-and-population-research/victoria-in-future
 
-3.	Transform: the cleaning, checks and Exploratory Data Analysis process
+**3.	Transform: the cleaning, checks and Exploratory Data Analysis process**
 
 Dataset 1: The Regional Population Growth 2018-2019 from ABS
 
@@ -91,9 +89,8 @@ Exploratory Analysis:
 -	The min value being at 0 for the population 2018/19 and the population density, we will sort the dataframe to understand the reasons some suburbs might have no population.
 -	We sorted the dataframe to identify the 10 suburbs with the lowest population in 2019. The suburbs are for example Essendon Airport or Wilsons Promontory. It makes sense people work or walk there but not many live in these suburbs.
 -	We looked at the correlation between population 2019 and the population density 2019 to ‘map’ all suburbs. 
-
- 
-
+![Population_vs_population_density](/images/ETL1.png)
+Format: ![Alt Text](url)
 
 -	We can identify a few outliers – so we checked to see if the suburbs with the highest density were relevant. All suburbs with a high population density are the closest to Melbourne CBD and are relevant.
 
