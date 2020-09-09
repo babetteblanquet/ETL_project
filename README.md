@@ -66,24 +66,24 @@ https://www.planning.vic.gov.au/land-use-and-population-research/victoria-in-fut
 
 **3.	Transform: the cleaning, checks and Exploratory Data Analysis process**
 
-Dataset 1: The Regional Population Growth 2018-2019 from ABS
+**Dataset 1: The Regional Population Growth 2018-2019 from ABS**
 
 The transformations have been applied in a Jupyter Notebook named: (“ABS_population_growth18-19_Transformation.ipynb”)
 
-Basic transformations applied:
+*Basic transformations applied:*
 
 -	Setting the row containing the column names as the new header
 -	Renaming some columns with iloc as 6 columns appeared under the same name ‘no.’
 -	Removing ‘junk’ rows at the top and bottom of the table using the iloc method
 -	Selecting the columns needed for our database
 
-Checking the quality of the data:
+*Checking the quality of the data:*
 
 -	Dropping any NULL value and checking the count of rows
 -	Checking the type of data
 -	As they are all string/object, we converted the relevant columns to integer and float
 
-Exploratory Analysis:
+*Exploratory Analysis:*
 
 -	Checking the min and max values with the describe() method
 -	The min value being at 0 for the population 2018/19 and the population density, we will sort the dataframe to understand the reasons some suburbs might have no population.
@@ -93,31 +93,89 @@ Exploratory Analysis:
 
 -	We can identify a few outliers – so we checked to see if the suburbs with the highest density were relevant. All suburbs with a high population density are the closest to Melbourne CBD and are relevant.
 
+**Dataset 2: The Regional Population Growth 2018-2019 from ABS**
+
+The transformations have been applied in a Jupyter Notebook named: (“Household_types_Transformation.ipynb”)
+
+*Basic transformations applied:
+
+-	Setting the row containing the column names as the new header
+-	Removing ‘junk’ rows at the top and bottom of the table using the iloc method
+-	A breakdown of the dataset of 45 columns into five smaller datasets - each will contain the households projected at different years: 2016, 2021, 2026, 2031, 2036
+-	A new column Year/Date has been added to each dataset
+-	Then a master file has been created by concatenating the five small datasets. 
+-	The master file contains 2310 rows - which includes the count of households in 462 suburbs for five different years. 
+
+*Checking the quality of the data:
+
+-	Checking the type of data: most of the data is in string format although seven columns should be integers to be able to perform aggregations.
+-	Removing commas from numbers (e.g. 1,675 to 1675) to be able to convert them as integers.
+-	Dropping Null values
+-	Dropping eventual duplicates – it happens the dataset had no null value or duplicate
+
+*Exploratory Analysis:
+
+-	Checking the min and max values with the describe() method
+-	The min value being at 0 we will group and sort the dataframe to understand the reasons some suburbs might have 0 households.
+-	There are six suburbs at 0 households, but they are either national parks or airports. Therefore, the data is relevant.
+-	We compared the number of total households in 2016 versus the projections in 2036 to check if the data is relevant with a linear regression model.
+![Count of total households in 2016 vs 2036](https://github.com/babetteblanquet/images/blob/master/ETL-2.png)
+
+-	The linear regression shows most suburbs are expected to grow by 1.5 over 20 years but quite a few suburbs will grow at much higher rate (outliers).
+-	To verify the quality of the data we wanted to identify these suburbs seen as outliers 
+-	We calculated the growth rate between 2016 and 2036 and sorted the data to identify the suburbs with the highest growth.
+-	We can identify the main suburbs Planning Victoria is expected to develop intensively over the next 20 years – such as Port Melbourne Industrial Flemington Racecourse and Rockbank- Mount Cottrell. 
+
+**Conclusion:** the quality of the data is good and can be loaded in the database.
+
+The master file has been saved as csv named “master_households_types.csv”
+
+**4.	LOAD - Data storage**
+
+We have chosen to load the data and store them in relational database as the data is more structured and a relationship between the datasets can be established.
+
+We have identified SA2 (Statistical Area 2) code as the foreign key to join the datasets.  We can then perform queries joining the data from the two tables.
+
+Please see Entity Relationship Diagram (ERD) below depicting the relationship between the two tables from the datasets.
+![Count of total households in 2016 vs 2036](https://github.com/babetteblanquet/images/blob/master/ETL-3.png)
+
+**Queries used after loading to database:**
+
+Query all rows in each table: Select * from households_type;
+-	Query household growth for a sa2 area for each forecast period: 
+o	Select stat_date, sa2_code, sa2_name, couple_family_with_children from households_type where sa2_code = '210051445';
+
+
+We can also perform query joining information from the 2 tables such as the one below:
+
+SELECT 
+	p.sa3_code,
+	p.sa3_name,
+	p.sa2_code, 
+	p.sa2_name, 
+	p.area_size,
+	p.population_density_2019,
+	h.stat_date, 
+	h.couple_family_with_children,
+	h.couple_family_without_children
+FROM population_growth p
+INNER JOIN households_type AS h ON
+	p.sa2_code = h.sa2_code
+WHERE h.stat_date = '2021-06-30' AND p.sa3_code = '20501';
+
+
 -----------------------------------------------
 
-In this repository you will find the ETL project for Team 5:
-
-The Victorian population and the projections of households until 2036
-
-
-The folders are organised as per below:
+Here is how the repository is organised:
 
 0- Original XL files dowsloaded from sources
-
 1- Proposal of the project
-
 2- CSV (original files converted to CSV)
-
 3- The notebook for the Transformation of the ABS Population data named: "3-ABS_population_growth18-19_Transformation"
-
 4- The notebook for the Transformation of the Household types from Planning Victoria named: "4-Household_types_Transformation"
-
 5-The final report named "5-ETL Report-Team_5-Final"
-
 6-ERD image
-
 7-Schema.sql - the schema to create the SQL database
-
 8-query.sql is an example of query we can perform on the joined tables.
 
 
