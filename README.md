@@ -89,8 +89,7 @@ Exploratory Analysis:
 -	The min value being at 0 for the population 2018/19 and the population density, we will sort the dataframe to understand the reasons some suburbs might have no population.
 -	We sorted the dataframe to identify the 10 suburbs with the lowest population in 2019. The suburbs are for example Essendon Airport or Wilsons Promontory. It makes sense people work or walk there but not many live in these suburbs.
 -	We looked at the correlation between population 2019 and the population density 2019 to ‘map’ all suburbs. 
-![Population_vs_population_density](/images/ETL1.png)
-Format: ![Alt Text](url)
+![Population_vs_population_density](https://github.com/babetteblanquet/images/blob/master/ETL-1.png)
 
 -	We can identify a few outliers – so we checked to see if the suburbs with the highest density were relevant. All suburbs with a high population density are the closest to Melbourne CBD and are relevant.
 
