@@ -23,7 +23,7 @@ This analysis will be useful to forecast the needs of schools, aged care facilit
 
 **2.	Extract the data sources**
 
-•	Dataset 1:
+**Dataset 1:**
 
 Regional Population Growth 2018-2019
 Source: Australia Bureau of Statistics
@@ -34,8 +34,8 @@ o	The estimated population in 2018
 o	The estimated population in 2019
 o	The components of population change
   -	The natural migration
-  - The internal migration
-  - The overseas migration
+  - 	The internal migration
+  -	The overseas migration
 o	The size of each area (km2)
 o	The population density in 2019
 
@@ -45,13 +45,13 @@ Extract method: this dataset has been downloaded from its source and the Table 2
 https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/3218.02018-19?OpenDocument
 
 
-•	Dataset 2:
+**Dataset 2:**
 
 Victoria in Future 2019 (VIF2019) Population and Household Projections – Table “Household Types”
 Source: Planning Victoria
 
 This dataset provides the number of households by household type for Statistical Areas from Level 2 to Level 4 (SA2, SA3, SA4), Greater Capital City Statistical Areas (GCCSA) and Victoria:
-o	The estimated number of household types in 2016, 2021, 2026, 2031, 2036
+ - 	The estimated number of household types in 2016, 2021, 2026, 2031, 2036
 With the breakdown below:
   -	Couple family with children	
   -	Couple family without children	
@@ -97,7 +97,7 @@ The transformations have been applied in a Jupyter Notebook named: (“ABS_popul
 
 The transformations have been applied in a Jupyter Notebook named: (“Household_types_Transformation.ipynb”)
 
-*Basic transformations applied:
+*Basic transformations applied:*
 
 -	Setting the row containing the column names as the new header
 -	Removing ‘junk’ rows at the top and bottom of the table using the iloc method
@@ -106,19 +106,20 @@ The transformations have been applied in a Jupyter Notebook named: (“Household
 -	Then a master file has been created by concatenating the five small datasets. 
 -	The master file contains 2310 rows - which includes the count of households in 462 suburbs for five different years. 
 
-*Checking the quality of the data:
+*Checking the quality of the data:*
 
 -	Checking the type of data: most of the data is in string format although seven columns should be integers to be able to perform aggregations.
 -	Removing commas from numbers (e.g. 1,675 to 1675) to be able to convert them as integers.
 -	Dropping Null values
 -	Dropping eventual duplicates – it happens the dataset had no null value or duplicate
 
-*Exploratory Analysis:
+*Exploratory Analysis:*
 
 -	Checking the min and max values with the describe() method
 -	The min value being at 0 we will group and sort the dataframe to understand the reasons some suburbs might have 0 households.
 -	There are six suburbs at 0 households, but they are either national parks or airports. Therefore, the data is relevant.
 -	We compared the number of total households in 2016 versus the projections in 2036 to check if the data is relevant with a linear regression model.
+
 ![Count of total households in 2016 vs 2036](https://github.com/babetteblanquet/images/blob/master/ETL-2.png)
 
 -	The linear regression shows most suburbs are expected to grow by 1.5 over 20 years but quite a few suburbs will grow at much higher rate (outliers).
