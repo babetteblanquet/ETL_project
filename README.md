@@ -6,7 +6,7 @@
 3.	Nelson Javier Garcia
 4.	Babette Blanquet
 
-**1.	Project overview:**
+## 1.	Project overview: ##
 In this ETL project, our goal is to build a database to understand the correlation between current population growth and projections of number of households in Victoria.
 
 Our dataset will provide data at the Statistical Area 2 (SA2) level which is equivalent to a suburb. For reference, there are 462 suburbs or SA2 in Victoria.
@@ -21,7 +21,7 @@ With the new dataset, we will be able to create new queries to answer questions 
 
 This analysis will be useful to forecast the needs of schools, aged care facilities, amenities, number and types of dwellings to service each area at Sa2 level but also SA3 and SA4 which are greater areas.
 
-**2.	Extract the data sources**
+## 2.	Extract the data sources ## 
 
 **Dataset 1:**
 
@@ -64,7 +64,7 @@ With the breakdown below:
 Extract method: this dataset has been downloaded from its source and the relevant table saved as CSV.
 https://www.planning.vic.gov.au/land-use-and-population-research/victoria-in-future
 
-**3.	Transform: the cleaning, checks and Exploratory Data Analysis process**
+## 3.	Transform: the cleaning, checks and Exploratory Data Analysis process ##
 
 **Dataset 1: The Regional Population Growth 2018-2019 from ABS**
 
@@ -131,7 +131,7 @@ The transformations have been applied in a Jupyter Notebook named: (“Household
 
 The master file has been saved as csv named “master_households_types.csv”
 
-**4.	LOAD - Data storage**
+## 4.	LOAD - Data storage ##
 
 We have chosen to load the data and store them in relational database as the data is more structured and a relationship between the datasets can be established.
 
